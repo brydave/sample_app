@@ -1,25 +1,31 @@
-# SQLite version 3.x
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
-#
-default: &default
-  adapter: sqlite3
-  pool: 5
-  timeout: 5000
-
 development:
-  <<: *default
-  database: db/development.sqlite3
+  adapter: mysql2
+  database: sampleapp_development
+  username: root
+  password:
+  host: 127.0.0.1
+  port: 3306
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: db/test.sqlite3
+  adapter: mysql2
+  database: sampleapp_test
+  username: root
+  password:
+  host: 127.0.0.1
+  port: 3306
 
-production:
-  <<: *default
-  database: db/production.sqlite3
+# staging:
+#   adapter: mysql2
+#   database: sampleapp_staging
+#   username: staging
+#   password: e2ek.4:9
+#   host: 10.0.4.155 # db.tick.staging2.molehill.managedmachine.com
+#   port: 3306
+#
+# production:
+#   adapter: mysql2
+#   database: sampleapp_production
+#   username: production
+#   password: e2ek.4:9
+#   host: 10.0.3.5 #db1.tick.molehill.managedmachine.com
+#   port: 3306
