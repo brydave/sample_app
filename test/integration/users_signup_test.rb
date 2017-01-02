@@ -18,6 +18,18 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_select 'form[action="/signup"]'
   end
 
+  test "valid signup information" do
+    get signup_path
+    assert_difference 'User.count' do
+      post signup_path, params: { user: { name: "Example User",
+                                         email: "example@example.com",
+                                         password: "password",
+                                         password_confirmation: "password"} }
+    end
+    follow_redirect!
+    assert_template 'users/show'
+  end
+
 end
 
 # The URLs for an unsubmitted signup form and for a submitted signup form are /signup and /users, respectively, which don’t match. This is due to our use of a custom named route in the former case (added in Listing 5.43) and a default RESTful route in the latter case (Listing 7.3). Resolve this discrepancy by adding the code shown in Listing 7.26 and Listing 7.27. Submit the new form to confirm that both cases now use the same /signup URL. Are the tests still green? Why?
